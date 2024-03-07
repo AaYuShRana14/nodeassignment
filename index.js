@@ -4,7 +4,7 @@ const app=express();
 const { ObjectId } = require('mongodb');
 const mongoose=require('mongoose');
 const Users=require('./Model/user');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const cors=require('cors');
 const jwt=require('jsonwebtoken');
 const User = require("./Model/user");
@@ -92,6 +92,7 @@ app.get('/reset-password/:id/:token',async(req,res)=>{
         return;
     }
     const user=await User.findById(id);
+
     if(!user){
         res.send("Invalid user");
         return;
