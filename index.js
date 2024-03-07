@@ -29,7 +29,6 @@ mongoose.connect('mongodb+srv://antineutrino1464:tvEdj7tV3HY@cluster.4ipxphf.mon
     console.log(e);
 })
 
-
 app.post('/register',async(req,res)=>{
     const {email,username,password}=req.body;
     const data=userdata.safeParse({email,username,password}); // validating input fields
@@ -83,7 +82,7 @@ app.post('/forgot-password',async(req,res)=>{
     const resetpasswordlink=`http://nodeassignmentt.onrender.com/reset-password/${userid}/${token}`;
     return res.status(200).json({resetpasswordlink});
 })
-app.get('/reset-password/:id/:token',async(req,res)=>{ // the link wont be valid after one time as the secret used will change.
+app.post('/reset-password/:id/:token',async(req,res)=>{ // the link wont be valid after one time as the secret used will change.
     const{id,token}=req.params;
     const{password}=req.body;
     if (!ObjectId.isValid(id)) { // checking if the user id is valid
