@@ -11,8 +11,9 @@ const User = require("./Model/user");
 require('dotenv').config();
 const jwtsecret=process.env.SECRET;
 app.use(cors());
-app.use(express.json());
-
+app.use(express.urlencoded({
+    extended: true
+}));
 const userdata = z.object({
     username:z.string().min(5),
     email: z.string().email(),
