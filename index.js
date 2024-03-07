@@ -81,7 +81,7 @@ app.post('/forgot-password',async(req,res)=>{
     const secret=jwtsecret+user.password;
     const userid=user._id.toString();
     const token=jwt.sign({userid},secret, { expiresIn: '5m' }); // creating a new token for reseting password link
-    const resetpasswordlink=`http://localhost:3000/reset-password/${userid}/${token}`;
+    const resetpasswordlink=`http://nodeassignmentt.onrender.com/reset-password/${userid}/${token}`;
     return res.status(200).json({resetpasswordlink});
 })
 app.get('/reset-password/:id/:token',async(req,res)=>{ // the link wont be valid after one time as the secret used will change.
@@ -102,7 +102,7 @@ app.get('/reset-password/:id/:token',async(req,res)=>{ // the link wont be valid
         const verified=jwt.verify(token,secret);// verifying the token if link is used once and password is changed the token will change and link cant be used again
         const hashpassword = await bcrypt.hash(password, 10);// hashing the password before storing in database
         user.password=hashpassword;// upadting the password 
-        user.save();// storing new password
+        user.save();// saving user
         res.send(user);
     }
     catch(error){
