@@ -102,7 +102,7 @@ app.get('/reset-password/:id/:token',async(req,res)=>{ // the link wont be valid
         const verified=jwt.verify(token,secret);// verifying the token if link is used once and password is changed the token will change and link cant be used again
         const hashpassword = await bcrypt.hash(password, 10);// hashing the password before storing in database
         user.password=hashpassword;// upadting the password 
-        user.save();// storing new password
+        user.save();// saving user
         res.send(user);
     }
     catch(error){
