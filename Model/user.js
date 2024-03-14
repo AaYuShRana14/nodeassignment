@@ -12,7 +12,14 @@ const userSchema=new Schema({
     password:{
         type:String,
         required:true,
-    }
+    },
+    posts:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Post'
+        }
+    ],
+    default:[]
 })
-const User=mongoose.model('TestUser',userSchema);
+const User=mongoose.model('User',userSchema);
 module.exports=User;
